@@ -4,19 +4,25 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function register(Request $request): RedirectResponse
+
+    public function register(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application
+    {
+        return view('panels.register.register');
+    }
+
+    public function registerUser(Request $request): RedirectResponse
     {
         $incomingFields = $request->validate([
-            'name' => ['required', 'min:3', 'max:35'],
+            'firstname' => ['required', 'min:3', 'max:35'],
+            'surname' => ['required', 'min:3', 'max:35'],
             'email' => ['required', 'email', Rule::unique('users', 'email')],
             'password' => ['required', 'min:12', 'max:64']
         ]);
@@ -35,7 +41,12 @@ class UserController extends Controller
         return redirect('/');
     }
 
-    public function login(Request $request): RedirectResponse
+    public function login()
+    {
+        return view('panels.login.login');
+    }
+
+    public function loginSubmission(Request $request): RedirectResponse
     {
 
         $incomingFields = $request->validate([

@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Login Page</title>
+    <!-- Stylesheet -->
+    @vite('resources/css/app.css')
 </head>
 <body>
 
@@ -47,25 +49,7 @@
     </div>
 
 @else
-    <div id="register" style="border: 3px solid black; padding: 5px; margin: 0 0 10px 0">
-        <h2>Register</h2>
-        <form id="register-form" action="{{ route('register') }}" method="POST">
-            @csrf
-            <input type="text" name="name" placeholder="name">
-            <input type="email" name="email" placeholder="email">
-            <input type="password" name="password" placeholder="password">
-            <button form="register-form" type="submit">Register</button>
-        </form>
-    </div>
-    <div id="login" style="border: 3px solid black; padding: 5px">
-        <h2>Login</h2>
-        <form id="login-form" action="{{ route('login') }}" method="POST">
-            @csrf
-            <input type="email" name="login_email" placeholder="email">
-            <input type="password" name="login_password" placeholder="password">
-            <button form="login-form" type="submit">Login</button>
-        </form>
-    </div>
+    @include('panels.login.login');
 @endauth
 </body>
 </html>
